@@ -10,5 +10,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # Set the build type to Debug
 set(CMAKE_BUILD_TYPE Debug)
 
+# Add compiler flags to enable all warnings
+add_compile_options(-Wall)
+
 # Add the executable
 add_executable(Learning main.cpp problem4.cpp)

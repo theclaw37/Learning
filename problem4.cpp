@@ -1,5 +1,4 @@
 #include <vector>
-#include <print>
 
 namespace problem4 {
 
@@ -12,7 +11,7 @@ namespace problem4 {
         {
             mid = left + (right - left) / 2;
 
-            if (mid == low || mid == high || vec[mid - 1] <= item && vec[mid] >= item) 
+            if (mid == low || mid == high || (vec[mid - 1] <= item && vec[mid] >= item)) 
                 return mid;
 
             if (vec[mid] < item) 
@@ -23,6 +22,7 @@ namespace problem4 {
 
         return mid;
     }
+
 
     double findMedianSortedArrays(std::vector<int>& nums1, std::vector<int>& nums2) 
     {
