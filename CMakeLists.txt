@@ -14,4 +14,4 @@ set(CMAKE_BUILD_TYPE Debug)
 add_compile_options(-Wall)
 
 # Add the executable
-add_executable(Learning main.cpp problem4.cpp)
+add_executable(Learning main.cpp Problems/problem4.cpp)
