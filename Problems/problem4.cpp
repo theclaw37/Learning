@@ -1,7 +1,8 @@
 #include <vector>
 #include <print>
 
-namespace problem4 {
+namespace problem4 
+{
     double findMedianSortedArrays(std::vector<int>& nums1, std::vector<int>& nums2) 
     {
         int nums1Size = nums1.size(), nums2Size = nums2.size();
