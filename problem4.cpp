@@ -1,83 +1,47 @@
 #include <vector>
+#include <print>
 
 namespace problem4 {
-
-    size_t bSearchSplit(std::vector<int>& vec, size_t low, size_t high, int item)
-    {
-        size_t left = low, right = high;
-        size_t mid;
-
-        while (left <= right) 
-        {
-            mid = left + (right - left) / 2;
-
-            if (mid == low || mid == high || (vec[mid - 1] <= item && vec[mid] >= item)) 
-                return mid;
-
-            if (vec[mid] < item) 
-                left = mid;
-            else 
-                right = mid;
-        }
-
-        return mid;
-    }
-
-
     double findMedianSortedArrays(std::vector<int>& nums1, std::vector<int>& nums2) 
     {
-        size_t totalSize = nums1.size() + nums2.size();
-
-        std::vector<int>& searchVector = nums1.size() <= nums2.size() ? nums1 : nums2;
-        std::vector<int>& otherVector = nums1.size() <= nums2.size() ? nums2 : nums1;
-
-        size_t halfSearch = searchVector.size() / 2;
-        size_t halfOther = otherVector.size() / 2;
-
-        size_t searchSplit = halfSearch;
-        size_t otherSplit = halfOther;
-
-        bool slor, srol;
-        do
-        {
-            // search left other right
-            slor = searchVector[searchSplit - 1] < otherVector[otherSplit];
-            // search right other left
-            srol = searchVector[searchSplit] > otherVector[otherSplit - 1];
-
-            // these two are mutually exclusively false (they can't both be false at the same time)
-            if (!slor) 
-            {
-                // search left of searchSplit
-                searchSplit = bSearchSplit(searchVector, 0, searchSplit, otherVector[otherSplit]);
-            }
-            if (!srol)
-            {
-                // search right of searchSplit
-                searchSplit = bSearchSplit(searchVector, searchSplit, searchVector.size(), otherVector[otherSplit - 1]);
-            }
-            // ensure the middle invariant
-            otherSplit = halfOther - (searchSplit - halfSearch);        
-        } 
-        while (!(slor && srol));
-
-        size_t itemsNeeded = totalSize % 2 ? 1 : 2;
-        size_t itemsNeededLeft = itemsNeeded;
-        float median = 0;
-        while (itemsNeededLeft--) 
-        {
-            if (searchVector[searchSplit] <= otherVector[otherSplit]) 
-            {
-                median += searchVector[searchSplit++];
-            } 
-            else 
-            {
-                median += otherVector[otherSplit++];
-            }
-        }
-        median /= itemsNeeded;
+        int nums1Size = nums1.size(), nums2Size = nums2.size();
+        int totalSize = nums1Size + nums2Size;
         
+        if (nums1Size > nums2Size)
+        {
+            std::swap(nums1, nums2);
+            std::swap(nums1Size, nums2Size);
+        }
+    
+        int left = 0, right = nums1Size;
+        while (left <= right) 
+        {
+            int midNums1 = (left + right) / 2;
+            int midNums2 = (nums1Size + nums2Size + 1) / 2 - midNums1;
 
-        return median;
+            int nums1LeftMax = midNums1 == 0 ? std::numeric_limits<int>::min() : nums1[midNums1 - 1];
+            int nums2RightMin = midNums2 == nums2Size ? std::numeric_limits<int>::max() : nums2[midNums2];
+            int nums1RightMin = midNums1 == nums1Size ? std::numeric_limits<int>::max() : nums1[midNums1];            
+            int nums2LeftMax = midNums2 == 0 ? std::numeric_limits<int>::min() : nums2[midNums2 - 1];
+
+            if (nums1LeftMax <= nums2RightMin && nums2LeftMax <= nums1RightMin) 
+            {
+                // All good, we found the split
+                if (totalSize % 2 == 0)
+                    // we got an even number of elements, so there's two medians
+                    return (std::max(nums1LeftMax, nums2LeftMax) + std::min(nums1RightMin, nums2RightMin)) / 2.0;
+                else
+                    // we got an odd number of elements, so there's only one median
+                    return std::max(nums1LeftMax, nums2LeftMax);
+            }
+
+            if (nums1LeftMax > nums2RightMin)
+                // Too far right, go left
+                right = midNums1 - 1;
+            else
+                // Too far left, go right
+                left = midNums1 + 1;
+        }
+        return 0;
     }
 }
