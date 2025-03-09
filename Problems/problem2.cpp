@@ -1,5 +1,3 @@
-#include "problem2.h"
-
 namespace problem2 
 {
     struct ListNode 
@@ -10,7 +8,7 @@ namespace problem2
          ListNode(int x) : val(x), next(nullptr) {}
          ListNode(int x, ListNode *next) : val(x), next(next) {}
     };
-    
+
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) 
     {
         int remainder = 0;
