@@ -20,3 +20,6 @@ add_compile_options(-Wall)
 
 # Add the executable
 add_executable(Learning main.cpp)
+
+# Link the SFML libraries
+# target_link_libraries(Learning sfml-graphics sfml-window sfml-system)

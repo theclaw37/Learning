@@ -30,7 +30,7 @@ void update_grid(int x, int y){
 
 
 // Entry point into our program
-int main(){
+int start(){
     // Initialize our grid with 4 entries
     grid.reserve(4);
     std::fill(begin(grid),end(grid),0);
@@ -38,7 +38,7 @@ int main(){
 	// in our grid and update it accordingly.
     for(int x=0; x < 2; x++){
         for(int y=0; y<2; y++){
-			shapes.push_back(std::make_unique<sf::CircleShape>(100.0f));	
+			shapes.push_back(std::make_unique<sf::CircleShape>(200.0f));	
 		}
 	}
 
@@ -51,7 +51,7 @@ int main(){
     }
 
     // Main program loop
-	sf::RenderWindow window(sf::VideoMode({400, 400}), "SFML with C++ threads");
+	sf::RenderWindow window(sf::VideoMode({800, 800}), "Iubita");
 
 	// Main Game loop
 	while (window.isOpen() && isRunning)
@@ -69,7 +69,7 @@ int main(){
 		for(int x=0; x < 2; x++){
 			for(int y=0; y<2; y++){
 				// Set the position
-				shapes[y*2+x]->setPosition({x*200,y*200});
+				shapes[y*2+x]->setPosition({x * 400.0f, y * 400.0f});
 				// Update the color
 				if(0==grid[y*2+x]){
 					shapes[y*2+x]->setFillColor(sf::Color::Red);
@@ -87,6 +87,10 @@ int main(){
 		for(auto& shape: shapes){
 			window.draw(*shape);
 		}
+		sf::Texture texture("iubita.png", false, sf::IntRect({0, 0}, {512, 512})); // Throws sf::Exception if an error occurs
+		sf::Sprite sprite(texture);
+		sprite.setPosition({300.f, 300.f});
+		window.draw(sprite);
 		window.display();
 	}
 

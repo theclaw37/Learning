@@ -1,7 +1,7 @@
 #include <iostream>
-#include "Problems/problem12.cpp"
+#include "Problems/problem13.cpp"
 
 int main() {
-    std::cout << problem12::intToRoman(3749) << std::endl;
+    std::cout << problem13::romanToInt("MCMXCVI") << std::endl;
     return 0;
 }
