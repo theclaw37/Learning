@@ -1,12 +1,12 @@
 #include <iostream>
-#include "Problems/problem26.cpp"
+#include "Problems/problem27.cpp"
 
-using namespace problem26;
+using namespace problem27;
 
 int main() {
 
-    std::vector<int> nums = { 1, 1, 2 };
-    removeDuplicates(nums);
+    std::vector<int> nums = { 3, 2, 2, 3 };
+    removeElement(nums, 3);
 
     return 0;
 }
