@@ -21,6 +21,4 @@ namespace knapsack
 
         return maxGains[knapsackCapacity];
     }
-
-    int knapsack
 }

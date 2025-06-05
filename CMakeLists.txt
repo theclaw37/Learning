@@ -27,7 +27,7 @@ include_directories(${SFML_PATH}/include)
 link_directories(${SFML_PATH}/lib)
 
 # Add compiler flags to enable all warnings
-add_compile_options(-Wall)
+add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 
 # Add compiler flags to enable colorized output
 add_compile_options(-fdiagnostics-color=always)
