@@ -2,13 +2,12 @@
 #include <unordered_map>
 #include <map>
 #include <ranges>
-#include <print>
 
 namespace problem347
 {
     using namespace std;
     
-    vector<int> topKFrequent(vector<int>&& nums, int k) {
+    vector<int> topKFrequent(const vector<int> & nums, int k) {
         std::unordered_map<int, size_t> keyToFreq;
         std::map<size_t, vector<int>> freqToKey;
 
