@@ -1,8 +1,8 @@
 #include <iostream>
 #include <print>
-#include "Problems/problem30.cpp"
+#include "Problems/problem347.cpp"
 
 int main() {
-    std::print("{}", problem30::findSubstring("barfoofoobarthefoobarman", { "bar", "foo", "the" }));
+    std::print("{}", problem347::topKFrequent({1, 2}, 2));
     return 0;
 }
